@@ -5,7 +5,7 @@ manifest:
 checks:
   size:
     is:
-      xsmall: {{ branch.diff.size <= 5 }}
+      xsmall: {{ source.diff.files | allFormattingChange }}
       small: {{ branch.diff.size <= 20 }}
       medium: {{ branch.diff.size <= 100 }}
       large: {{ branch.diff.size <= 200 }}
@@ -16,6 +16,4 @@ automations:
     if:
       - {{ checks.size.is.small }}
     run:
-      - action: add-labels@v1
-        args:
-          labels: [good_size]
+      - action: approve@v1
